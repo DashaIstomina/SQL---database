@@ -17,7 +17,7 @@ SELECT client_id,
        last_name,   
        first_name,  
       registration_date   
-FROM clients  
+FROM clients;  
 
 Задача 3. Одобренные кредиты на крупную сумму  
 Руководитель кредитного отдела хочет посмотреть только крупные заявки, которые уже были одобрены.  
@@ -31,5 +31,77 @@ SELECT
 FROM loan_applications  
 WHERE current_status = 'APPROVED'  
   AND requested_amount > 500000;  
+
+
+Задача 4. Последние поступившие заявки  
+Руководитель кредитного отдела хочет сначала видеть самые свежие заявки, чтобы сотрудники обрабатывали их в порядке поступления.  
+Отсортировать заявки от самых новых к самым старым.  
+Решение: 
+SELECT 
+    application_id,
+    client_id,
+    requested_amount,
+    application_date,
+    current_status
+FROM loan_applications
+ORDER BY application_date DESC;  
+
+Задача 5. Пять последних заявок  
+Каждое утро руководитель открывает систему и хочет увидеть только последние 5 поступивших заявок, чтобы быстро оценить текущую нагрузку.  
+Отобразить только 5 самых новых заявок.  
+Решение:  
+SELECT   
+    application_id,  
+    client_id,  
+    requested_amount,  
+    application_date  
+FROM loan_applications  
+ORDER BY application_date DESC  
+LIMIT 5;  
+
+Задача 6. Города, в которых есть клиенты банка  
+Маркетинговый отдел планирует запуск региональной рекламной кампании. Перед началом необходимо получить список уникальных городов, в которых зарегистрированы клиенты банка.  
+Вывести только один столбец:  
+	city   
+Каждый город должен встретиться только один раз.  
+Решение:  
+SELECT DISTINCT city FROM clients;  
+
+Задача 7. Поиск клиентов по фамилии   
+Сотрудник колл-центра помнит только, что фамилия клиента начинается на «Иван», но не помнит окончание. Нужно найти всех таких клиентов.  
+Решение:  
+SELECT  
+    client_id,  
+    last_name,  
+    first_name,  
+    phone  
+FROM clients  
+WHERE last_name LIKE 'Иван%';  
+
+Задача 8. Банк запускает акцию только для клиентов из Москвы, Санкт-Петербурга и Перми.  
+Необходимо получить список таких клиентов.  
+Решение:  
+SELECT  
+    client_id,  
+    last_name,  
+    first_name,   
+    city  
+FROM clients   
+WHERE city IN ('Москва','Санкт-Петербург', 'Пермь');  
+
+Задача 9. Кредиты среднего размера    
+Руководитель хочет проанализировать заявки на кредиты от 300 000 до 700 000 рублей включительно.  
+Решение:   
+SELECT   
+    application_id,   
+    client_id,   
+    requested_amount   
+FROM loan_applications   
+WHERE requested_amount BETWEEN 300000 AND 700000;  
+       
+
+
+
+
 
 
