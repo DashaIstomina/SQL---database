@@ -34,7 +34,7 @@ commission
 Решение:  
 SELECT loan_id, issued_amount,   
 CASE  
-WHEN issued_amount < 100000 THEN (loan_amount * 0.01)  
+WHEN issued_amount < 100000 THEN (issued_amount * 0.01)  
 WHEN issued_amount BETWEEN 100000 AND 500000 THEN (issued_amount * 0.007)  
 ELSE issued_amount * 0.005   
 END AS commission  
